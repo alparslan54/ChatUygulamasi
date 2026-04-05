@@ -24,7 +24,7 @@ PORT = 50505
 # --- YENİ: PostgreSQL Bağlantı Bilgileri ---
 # Faz 1'de oluşturduğunuz kullanıcı adı, şifre ve veritabanı adı
 DB_USER = "chat_user"
-DB_PASS = "123456789Apo54.!"  # Kendi şifreniz
+DB_PASS = "######"  # Kendi şifreniz
 DB_NAME = "chat_app"
 DB_HOST = "127.0.0.1"  # Yerel sunucunuz (Radore'da da bu olabilir)
 # ---
