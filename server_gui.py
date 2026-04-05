@@ -23,10 +23,10 @@ PORT = 50505
 
 # --- YENİ: PostgreSQL Bağlantı Bilgileri ---
 # Faz 1'de oluşturduğunuz kullanıcı adı, şifre ve veritabanı adı
-DB_USER = "chat_user"
-DB_PASS = "123456789Apo54.!"  # Kendi şifreniz
+DB_USER = os.getenv("DB_USER", "db_username")
+DB_PASS = os.getenv("DB_PASS", "db_password") 
 DB_NAME = "chat_app"
-DB_HOST = "127.0.0.1"  # Yerel sunucunuz (Radore'da da bu olabilir)
+DB_HOST = "127.0.0.1" # Yerel sunucunuz (Radore'da da bu olabilir)
 # ---
 
 # Güvenlik Sınırları (Aynı)
@@ -134,7 +134,7 @@ async def setup_database():
         # ... setup_database fonksiyonunun içi ...
         try:
             admin_user = "admin"
-            admin_pass = "123456789Apo54.!"
+            admin_pass = ""YOUR_PASSWORD_HERE""
             hashed_pw = await asyncio.to_thread(hash_password, admin_pass)
 
             # SQL'i '?' yerine '$1, $2, $3' ile yazdığımıza dikkat et

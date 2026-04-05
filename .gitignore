@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Veritabanı ve Yerel Ayarlar
+local.properties
+.env
+
+# Sertifikalar ve Özel Veriler
+certs/key.pem
+certs/cert.pem
+audio_records/
+uploads/audio/
+
+# IDE
+.idea/
+.vscode/
+build/
+.gradle/
