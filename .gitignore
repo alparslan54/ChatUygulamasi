@@ -7,8 +7,8 @@ local.properties
 .env
 
 # Sertifikalar ve Özel Veriler
-certs/key.pem
-certs/cert.pem
+
+certs/
 audio_records/
 uploads/audio/
 
