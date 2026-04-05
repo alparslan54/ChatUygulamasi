@@ -41,23 +41,23 @@ Yönetici izinleri (Administrator / Root).
 
 Kurulum
 Bağımlılıkları yükleyin:
-
+#########################################################3
 Bash
 pip install -r requirements.txt
 .env dosyasını oluşturun ve yapılandırın:
-
+###############################################3
 Kod snippet'i
 VPN_PSK=gizli_anahtariniz
 VPN_SERVER_IP=sunucu_ip_adresiniz
+################################
 Çalıştırma
 Sunucu (Linux):
-
 Bash
 sudo python3 vpn_server2.py
 İstemci (Windows):
-
 Bash
 python main.py
+#################################################3
 🛡️ Güvenlik Notları
 Bu proje eğitim ve konsept kanıtlama (PoC) amacıyla geliştirilmiştir.
 
