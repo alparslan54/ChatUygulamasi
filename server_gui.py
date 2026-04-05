@@ -134,7 +134,7 @@ async def setup_database():
         # ... setup_database fonksiyonunun içi ...
         try:
             admin_user = "admin"
-            admin_pass = "123456789Apo54.!"
+            admin_pass = ""YOUR_PASSWORD_HERE""
             hashed_pw = await asyncio.to_thread(hash_password, admin_pass)
 
             # SQL'i '?' yerine '$1, $2, $3' ile yazdığımıza dikkat et
