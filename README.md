@@ -1,68 +1,60 @@
+Tabii ki, kopyalaması en kolay olacak şekilde, tüm README.md içeriğini aşağıda düz metin olarak hazırladım. Bu içeriği direkt seçip README.md dosyanın içine yapıştırabilirsin.
+
 UVP2 - Custom UDP VPN Protocol Implementation
-Bu proje, Python ve Wintun sürücüsü kullanılarak geliştirilmiş, düşük seviyeli (low-level) bir VPN tünelleme protokolüdür. UVP2 adını verdiğim bu özel protokol; güvenli anahtar değişimi, dinamik yönlendirme ve yüksek performanslı veri iletimi odaklı tasarlanmıştır.
+Bu proje, Python ve Wintun sürücüsü kullanılarak geliştirilmiş, düşük seviyeli (low-level) bir VPN tünelleme çözümüdür. UVP2 protokolü; eğitim ve ağ güvenliği araştırmaları kapsamında, güvenli veri iletimi ve dinamik ağ yönetimi prensiplerini uygulamak amacıyla tasarlanmıştır.
 
 🚀 Öne Çıkan Özellikler
-Özel Protokol Tasarımı: UDP tabanlı, düşük gecikmeli ve "Stateful" oturum yönetimi içeren özgün paket yapısı.
+Özel Protokol Tasarımı (UVP2): UDP tabanlı, düşük gecikmeli ve oturum (session) yönetimli özgün paket yapısı.
 
-Wintun Entegrasyonu: Windows üzerinde en yüksek performansı sunan Wintun sürücüsü ile Layer 3 (IP) tünelleme.
+Wintun Sürücü Entegrasyonu: Windows sistemlerde yüksek performanslı Layer 3 (IP) tünelleme ve veri yakalama.
 
-Gelişmiş Kriptografi:
+Gelişmiş Kriptografik Katman:
 
-AES-256-GCM: Veri gizliliği ve bütünlüğü için kimlik doğrulamalı şifreleme.
+AES-256-GCM: Veri gizliliği ve bütünlüğü için kimlik doğrulamalı şifreleme (Authenticated Encryption).
 
 HKDF (RFC 5869): HMAC tabanlı anahtar türetme fonksiyonu ile her oturum için benzersiz anahtar üretimi.
 
-Key Rotation: Belirli aralıklarla (60sn) otomatik anahtar değişimi (Forward Secrecy benzeri koruma).
+Dinamik Anahtar Rotasyonu: 60 saniyelik aralıklarla otomatik anahtar yenileme (Perfect Forward Secrecy prensibi).
 
-Otomatik Ağ Yönetimi: PowerShell üzerinden dinamik IP ataması, DNS yapılandırması ve varsayılan ağ geçidi (Default Gateway) yönetimi.
+Otomatik Ağ Konfigürasyonu: PowerShell üzerinden dinamik IP atama, DNS yapılandırma ve varsayılan ağ geçidi yönetimi.
 
-Sunucu Kapasitesi: Multi-client desteği, IP maskeleme (NAT) ve temel PPS (Packet Per Second) tabanlı flood koruması.
+Sunucu Altyapısı: Multi-client desteği, IP maskeleme (NAT) ve PPS tabanlı temel flood koruması.
 
 🛠️ Teknik Mimari
-Proje, birbirini tamamlayan 5 temel modülden oluşmaktadır:
+Proje beş ana bileşenden oluşmaktadır:
 
-main.py: İstemci tarafındaki ana kontrolcü. Adaptör kurulumu ve Windows ağ ayarlarını yönetir.
+main.py: İstemci tarafı kontrolcü; adaptör kurulumu ve Windows ağ ayarlarını yönetir.
 
-vpn_server2.py: Linux tabanlı, multi-client destekli VPN sunucusu. NAT ve oturum izolasyonu sağlar.
+vpn_server2.py: Linux tabanlı sunucu; istemci oturumlarını yönetir ve trafiği NAT üzerinden internete aktarır.
 
-transport.py: UDP üzerinden güvenli veri taşıma katmanı. Sıralama (Sequence) kontrolü ile "Replay Attack" koruması sağlar.
+transport.py: UDP üzerinden güvenli taşıma katmanı; Replay Attack koruması ve oturum takibi sağlar.
 
-crypto.py: Tüm şifreleme ve anahtar yönetim süreçlerinin merkezidir.
+crypto.py: Şifreleme, anahtar türetme ve rotasyon işlemlerini gerçekleştiren güvenlik modülü.
 
-protocol.py: UVP2 paket formatını (Header, MAC, Type) tanımlayan protokol arayüzü.
+protocol.py: UVP2 paket formatını tanımlayan düşük seviyeli protokol arayüzü.
 
 ⚙️ Kurulum ve Kullanım
 Gereksinimler
 Python 3.10+
 
-Windows tarafında wintun.dll dosyası (Proje dizininde olmalıdır).
+Windows işletim sistemi (İstemci için) ve wintun.dll dosyası.
 
-Yönetici izinleri (Administrator / Root).
+Yönetici (Administrator/Root) izinleri.
 
-Kurulum
+Kurulum Adımları
 Bağımlılıkları yükleyin:
-#########################################################3
-Bash
 pip install -r requirements.txt
-.env dosyasını oluşturun ve yapılandırın:
-###############################################3
-Kod snippet'i
+
+.env dosyasını yapılandırın (Güvenlik nedeniyle asla paylaşılmamalıdır):
 VPN_PSK=gizli_anahtariniz
 VPN_SERVER_IP=sunucu_ip_adresiniz
-################################
+
 Çalıştırma
-Sunucu (Linux):
-Bash
-sudo python3 vpn_server2.py
-İstemci (Windows):
-Bash
-python main.py
-#################################################3
-🛡️ Güvenlik Notları
-Bu proje eğitim ve konsept kanıtlama (PoC) amacıyla geliştirilmiştir.
+Sunucu: sudo python3 vpn_server2.py
 
-PSK (Pre-Shared Key) bilgisi .env dosyası üzerinden yönetilir ve asla kaynak koda gömülmez.
+İstemci: python main.py
 
-Üretim ortamında kullanılmadan önce profesyonel bir sızma testi ve kod denetiminden geçmesi önerilir.
+🛡️ Güvenlik ve Uyarılar
+Bu proje konsept kanıtlama (PoC) amacıyla geliştirilmiştir.
 
-Not: Proje içerisinde kullanılan Wintun sürücüsü, WireGuard ekibi tarafından geliştirilen açık kaynaklı ve yüksek performanslı bir sürücüdür.
+Gizli anahtar (PSK) yönetimi çevre değişkenleri (.env) üzerinden yapılır ve kaynak koda dahil edilmez.
