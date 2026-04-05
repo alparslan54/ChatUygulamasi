@@ -23,10 +23,10 @@ PORT = 50505
 
 # --- YENİ: PostgreSQL Bağlantı Bilgileri ---
 # Faz 1'de oluşturduğunuz kullanıcı adı, şifre ve veritabanı adı
-DB_USER = "chat_user"
-DB_PASS = "######"  # Kendi şifreniz
+DB_USER = os.getenv("DB_USER", "db_username")
+DB_PASS = os.getenv("DB_PASS", "db_password") 
 DB_NAME = "chat_app"
-DB_HOST = "127.0.0.1"  # Yerel sunucunuz (Radore'da da bu olabilir)
+DB_HOST = "127.0.0.1" # Yerel sunucunuz (Radore'da da bu olabilir)
 # ---
 
 # Güvenlik Sınırları (Aynı)
